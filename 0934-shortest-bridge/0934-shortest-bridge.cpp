@@ -1,5 +1,26 @@
 class Solution {
 public:
+
+//     DFS: Find the first island, mark its cells as 2, and push all its cells into the queue.
+
+// BFS: Expand from all first-island cells simultaneously, converting water (0) to 2.
+
+// If BFS reaches the second island (1), return distance.
+
+// Use level-order BFS to count the number of water cells crossed.
+
+// Important:
+
+// Boundary: nr >= rows || nc >= cols
+
+// Use size = q.size() for level-order BFS.
+
+// Avoid reusing n for queue size because n represents rows.
+
+// Complexity: O(rows × cols) time and O(rows × cols) space.
+
+
+
     queue<pair<int,int>>q;
     int dr[4]={-1,1,0,0};
     int dc[4]={0,0,-1,1};
