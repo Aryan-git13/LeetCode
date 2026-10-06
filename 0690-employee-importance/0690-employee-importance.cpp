@@ -10,27 +10,20 @@ public:
 
 class Solution {
 public:
-    int getImportance(vector<Employee*> employees, int id) {
-        int n=employees.size();
-        queue<int>q;
-        q.push(id);
-        int cnt=0;
+    int dfs(vector<Employee*> employees,int x){
+        for(auto it:employees){
+            if(it->id==x){
+                int ans=it->importance;
 
-        while(!q.empty()){
-            int x=q.front();
-            q.pop();
-
-            for(auto it:employees){
-                if(it->id==x){
-                    cnt+=it->importance;
-
-                    for(auto x:it->subordinates){
-                        q.push(x);
-                    }
-                    break;
+                for(auto y:it->subordinates){
+                    ans+=dfs(employees,y);
                 }
+                return ans;
             }
         }
-        return cnt;
+        return 0;
+    }
+    int getImportance(vector<Employee*> employees, int id) {
+        return dfs(employees,id);
     }
 };
