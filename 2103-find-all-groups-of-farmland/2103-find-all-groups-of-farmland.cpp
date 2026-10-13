@@ -1,11 +1,9 @@
 class Solution {
 public:
-    void bfs(int i,int j,int n,int m,vector<vector<int>>&land,vector<int>&arr,vector<vector<int>>&vis){
+    void bfs(int i,int j,int n,int m,vector<vector<int>>&land,vector<int>&arr,vector<vector<int>>&vis,int& maxr,int& maxc){
         vis[i][j]=1;
         queue<pair<int,int>>q;
         q.push({i,j});
-        int a=i;
-        int b=j;
 
         int dr[]={-1,0,1,0};
         int dc[]={0,1,0,-1};
@@ -14,8 +12,8 @@ public:
             int x=q.front().first;
             int y=q.front().second;
             q.pop();
-            a=max(x,a);
-            b=max(y,b);
+            maxr=max(maxr,x);
+            maxc=max(maxc,y);
 
             for(int k=0;k<4;k++){
                 int nr=x+dr[k];
@@ -28,8 +26,6 @@ public:
                 }
             }   
         }
-        arr.push_back(a);
-        arr.push_back(b);
     }
     vector<vector<int>> findFarmland(vector<vector<int>>& land) {
         int n=land.size();
@@ -42,10 +38,10 @@ public:
             for(int j=0;j<m;j++){
                 if(land[i][j]==1 && !vis[i][j]){
                     vector<int>arr;
-                    arr.push_back(i);
-                    arr.push_back(j);
-                    bfs(i,j,n,m,land,arr,vis);
-                    ans.push_back(arr);
+                    int maxr=i;
+                    int maxc=j;
+                    bfs(i,j,n,m,land,arr,vis,maxr,maxc);
+                    ans.push_back({i,j,maxr,maxc});
                 }
             }
         }
