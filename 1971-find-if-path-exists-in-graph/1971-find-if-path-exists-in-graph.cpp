@@ -22,7 +22,7 @@ public:
             q.pop();
 
             for(auto it:adj[n]){
-                if(vis[it]==0){
+                if(!vis[it]){
                     vis[it]=1;
                     q.push(it);
 
